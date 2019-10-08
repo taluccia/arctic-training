@@ -12,8 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # define variables
 ```{r}
-x = c(15, 31, 46)
-y = c(27, 18, 37)
+x = c(15, 31, 46, 21, 5)
+y = c(27, 18, 37, 7, 32)
 ```
 
 ```{r}
