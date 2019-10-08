@@ -36,7 +36,7 @@ vignettes/*.pdf
 rsconnect/
 .Rproj.user
 
-# For Mac users
+# For Mac users computer specific files
 # .DS_Store
 
 # exclude output data file from push to github
