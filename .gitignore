@@ -35,3 +35,9 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 .Rproj.user
+
+# For Mac users
+# .DS_Store
+
+# exclude output data file from push to github
+# output_data/*
