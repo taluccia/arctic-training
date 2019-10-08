@@ -9,6 +9,6 @@ List of contributors
 
 A list of fruits
 1. apples
-2. oranges
+2. peaches
 3. kiwi
 
