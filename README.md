@@ -10,5 +10,5 @@ List of contributors
 A list of fruits
 1. apples
 2. peaches
-3. mango
+3. mango & watermelon
 
