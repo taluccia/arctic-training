@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(DT)
+library(leaflet)
 ```
 
 
@@ -80,12 +82,59 @@ ggplot(data = filter(annual_esc, SASAP.Region == "Kodiak"),
 Escapement over time: all regions
 
 ```{r, fig.width = 7, fig.height = 20}
-ggplot(annual_esc, aes(x = Year, y = total_esc, colour = Species)) +
+fig1 = ggplot(annual_esc, aes(x = Year, y = total_esc, colour = Species)) +
   geom_point() +
   geom_line() +
   facet_wrap(~SASAP.Region, scales = "free_y", ncol = 1) +
   my_theme
+
+fig1
+
+ggsave("figures/escapement.png", fig1, width = 7, height = 20, units = "in")
 ```
 
 
 # Map sampling locations
+
+Create a table with unique sampling locations, latitude, and longitude
+
+```{r}
+locations = esc %>% 
+  distinct(Location, Latitude, Longitude) %>% 
+  drop_na()
+```
+
+```{r}
+datatable(locations)
+```
+
+
+Map Sampling locations
+
+Package `sf` would allow you to convert UTM to Lat long
+
+```{r}
+leaflet(locations) %>%
+  addTiles() %>% 
+  addMarkers(lng = ~ Longitude, lat = ~ Latitude, popup = ~ Location)
+```
+
+```{r}
+leaflet(locations) %>% 
+  addWMSTiles("https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?",
+              layers = 'GEBCO_LATEST',
+              attribution = "Imagery reproduced from the GEBCO_2014 Grid, version 20150318, www.gebco.net") %>%
+  addCircleMarkers(lng = ~Longitude,
+                   lat = ~Latitude,
+                   popup = ~ Location,
+                   radius = 5,
+                   # set fill properties
+                   fillColor = "salmon",
+                   fillOpacity = 1,
+                   # set stroke properties
+                   stroke = T,
+                   weight = 0.5,
+                   color = "white",
+                   opacity = 1)
+```
+
