@@ -1,0 +1,82 @@
+---
+title: "Functions"
+author: "Anna Talucci"
+date: "October 10, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(roxygen2)
+source("conversion_functions.R") # put fnctions in a script and read it in here
+```
+
+
+# Create Data
+
+Create a vector of temperature data
+```{r}
+airtemps = c(212, 30.3, 75, 32)
+airtemp1 = (airtemps[1]-32)*5/9
+airtemp2 = (airtemps[2]-32)*5/9
+airtemp3 = (airtemps[3]-32)*5/9
+airtemp4 = (airtemps[4]-32)*5/9
+```
+
+
+# Write a function for F to C conversion
+
+`#'` Formal documentation for functions
+
+```{r}
+#' Convert from Fahrenheit to Celsius
+#'
+#' A much more detailed explanation of how the function works
+#' @param fahr represents a numeric input for degress Fahrenheit
+#' @return the temperature in Celsius
+#' @export
+#' @example fahr_to_celsius (212)
+
+fahr_to_celsius = function(fahr) {
+  # check if fahr is numeric stopifnot(!is.numeric(fahr))
+  celsius = (fahr-32)*5/9
+  return(celsius)
+}
+
+
+```
+```{r}
+celsius1 = fahr_to_celsius(airtemps[1])
+
+celsius1 == airtemp1
+
+celsiustemp = fahr_to_celsius(airtemps)
+celsiustemp
+```
+
+Write the inverse function for celsius to fahrenheit (0°C × 9/5) + 32 = 32°F
+
+
+```{r}
+#' Convert from Celsius to Fahrenheit 
+#'
+#' A much more detailed explanation of how the function works
+#' @param cel represents a numeric input for degress Celsius
+#' @return the temperature in Fahrenheit
+#' @export
+#' @example celsius_to_fahr (100)
+celsius_to_fahr = function(celsius) {
+  fahrenheit = (celsius * 9/5) + 32
+  return(fahrenheit)
+}
+
+
+```
+
+```{r}
+celsius_to_fahr(celsiustemp)
+```
+
