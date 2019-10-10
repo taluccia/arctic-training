@@ -40,4 +40,4 @@ rsconnect/
 # .DS_Store
 
 # exclude output data file from push to github
-# output_data/*
+figures/*
